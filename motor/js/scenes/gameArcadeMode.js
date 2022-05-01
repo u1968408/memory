@@ -81,7 +81,7 @@ class GameScene extends Phaser.Scene {
 									// '{"first_nom":"","first_punts":0,"second_nom":"","second_punts":0,"third_nom":"","third_punts":0}'
 
 									// Lo siento mucho, lo sé, soy consciente, perdóname por mis pecados, solo voy corto de tiempo y de valor para enfrentarme a otra cosa
-									if(records_data.first_punts < arcade_data.punts) {
+									if (records_data.first_punts < arcade_data.punts) {
 										records_data.third_nom = records_data.second_nom;
 										records_data.third_punts = records_data.second_punts;
 										records_data.second_nom = records_data.first_nom;
@@ -89,20 +89,20 @@ class GameScene extends Phaser.Scene {
 										records_data.first_nom = sessionStorage.getItem("username");
 										records_data.first_punts = arcade_data.punts;
 									}
-									else if(records_data.second_punts < arcade_data.punts) {
+									else if (records_data.second_punts < arcade_data.punts) {
 										records_data.third_nom = records_data.second_nom;
 										records_data.third_punts = records_data.second_punts;
 										records_data.second_nom = sessionStorage.getItem("username");
 										records_data.second_punts = arcade_data.punts;
 									}
-									else if(records_data.third_punts < arcade_data.punts) {
+									else if (records_data.third_punts < arcade_data.punts) {
 										records_data.third_nom = sessionStorage.getItem("username");
 										records_data.third_punts = arcade_data.punts;
 									}
 									localStorage.setItem("records", JSON.stringify(records_data));
 
 									var default_arcade_data = {
-										cards:2, dificulty:"easy", punts:0
+										cards: 2, dificulty: "easy", punts: 0
 									};
 									localStorage.setItem("arcade", JSON.stringify(default_arcade_data));
 									loadpage("../");
@@ -123,8 +123,10 @@ class GameScene extends Phaser.Scene {
 									let dific = arcade_data.dificulty;
 									if (dific == "easy") dific = "normal";
 									else dific = "hard";
+									let cartes = arcade_data.cards + 1;
+									if (cartes > 4) cartes = 4;
 									var new_arcade_data = {
-										cards:arcade_data.cards+1, dificulty:dific, punts:arcade_data.punts+this.score
+										cards: cartes, dificulty: dific, punts: arcade_data.punts + this.score
 									};
 									localStorage.setItem("arcade", JSON.stringify(new_arcade_data));
 									loadpage("phasergameArcade.html")
@@ -152,8 +154,10 @@ class GameScene extends Phaser.Scene {
 
 function get_cards() {
 	let nCartes = arcade_data.cards;
-	if (nCartes > 4) nCartes = 4;
-	else if (nCartes < 2) nCartes = 2;
+	if (nCartes > 4)
+		nCartes = 4;
+	else if (nCartes < 2)
+		nCartes = 2;
 	let arrayCartes = ['cb', 'co', 'sb', 'so', 'tb', 'to'];
 	let laDevolucionIncreibleDeCartasAleatoriasYFantasticas = []; // Perdoneme profe uwu, 
 	for (let i = 0; i < nCartes; i++) {
@@ -169,4 +173,8 @@ function puntuacio() {
 	let punts = 100 * this.numDif * this.num_cards_total - this.bad_clicks * (10 * this.numDif * this.num_cards_total + Math.pow(1.83, 2 * this.numDif));
 	console.log("Dificultat ", this.numDif, ": ", 100 * this.numDif * this.num_cards_total, " - ", this.bad_clicks * (10 * this.numDif * this.num_cards_total + Math.pow(1.83, 2 * this.numDif)), ": ", punts);
 	return punts;
+}
+
+function local_save() {
+	loadpage("../");
 }
