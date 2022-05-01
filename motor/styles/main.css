@@ -1,23 +1,34 @@
-input[type=number]{
+input[type=number] {
 	height: 3rem;
-    font-size: 1.3rem;
-    font-weight: bold;
-    width: 3rem;
-    text-align: center;
+	font-size: 1.3rem;
+	font-weight: bold;
+	width: 3rem;
+	text-align: center;
 }
 
+body {
+    background-color: #F4F0E7;
+}
 #title{
-	font-size: 26px;
-	line-height: 75px;
+	width: auto;
+    font-family: 'Luminari';
+	font-size: 46px;
+	line-height: 100px;
+	border:0ch;
+    text-transform:capitalize;
+    font-variant:small-caps;
+    font-weight:bold;
 }
 
 .menu-object{
-	display:block;
+	display:block; 
 	margin-left: auto;
 	margin-right: auto;
 	width: 300px;
-	height: 75px;
-	font-size: 16px;
+	height: 65px;
+    font-family: 'MrsEavesPetiteCaps';
+	font-size: 23px;
+	color: rgb(88,23,13);
 	margin-top: 10px;
 }
 
@@ -25,15 +36,71 @@ p{
 	text-align: center;
 }
 
-button.menu-object:active{
+/* button.menu-object:active{
 	font-size: 18px;
 	width: 275px;
 	height: 70px;
-}
+} */
 
-button.menu-object:hover:not(:active){
-	font-size: 22px;
+/* button.menu-object:hover:not(:active){
+	font-size: 32px;
+	font-weight: bold;
 	width: 325px;
 	height: 85px;
+} */
+
+@font-face {
+    font-family: 'MrsEavesPetiteCaps'; /*a name to be used later*/
+    src: url('../fonts/MrsEavesPetiteCaps_PetiteCaps.ttf'); /*URL to font*/
 }
 
+@font-face {
+    font-family: 'Luminari'; /*a name to be used later*/
+    src: url('../fonts/Luminari-Regular.ttf'); /*URL to font*/
+}
+/*FONT codi: https://codepen.io/bineshperingat/pen/EyyMMo */
+@keyframes gradient {
+	0% {
+		background: radial-gradient(circle at center, rgb(88,23,13) 0%, #fff 0%, #fff 100%);
+	}
+
+	25% {
+		background: radial-gradient(circle at center, rgb(88,23,13) 24%, #fff 25%, #fff 100%);
+	}
+
+	50% {
+		background: radial-gradient(circle at center, rgb(88,23,13) 49%, #fff 50%, #fff 100%);
+	}
+
+	75% {
+		background: radial-gradient(circle at center, rgb(88,23,13) 74%, #fff 75%, #fff 100%);
+	}
+
+	100% {
+		color: #fff;
+		background: radial-gradient(circle at center, rgb(88,23,13) 99%, #fff 100%, #fff 100%);
+	}
+}
+
+button {
+	margin-left: calc(50vw - 175px);
+	margin-top: calc(50vh - 30px);
+	width: 350px;
+	height: 60px;
+	border: none;
+	border-radius: 5px;
+	background: #fff;
+	font-weight: bold;
+	font-size: 1.1em;
+	color: rgb(88,23,13);
+	box-shadow: 0 6px 6px rgb(88,23,13);
+	outline: none;
+}
+
+button:active {
+	/* set time duration to your needs */
+	animation: gradient 100ms;
+	background: rgb(88,23,13);
+	color: #fff;
+	box-shadow: none;
+}
