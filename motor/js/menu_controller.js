@@ -7,7 +7,16 @@ function start_game(){
 }
 
 function phaser_game(){
+	name = prompt("User name");
+	
+	sessionStorage.setItem("username", name);
 	loadpage("./html/phasergame.html");
+}
+function phaser_game_arcade(){
+	name = prompt("User name");
+	
+	sessionStorage.setItem("username", name);
+	loadpage("./html/phasergameArcade.html");
 }
 
 function exit (){
