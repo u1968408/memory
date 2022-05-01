@@ -1,7 +1,7 @@
 var json = localStorage.getItem("arcade") || '{"cards":2,"dificulty":"easy","punts":0}';
 arcade_data = JSON.parse(json);
 
-var json2 = localStorage.getItem("records") || '{"first_nom":"","first_punts":0,"second_nom":"","second_punts":0,"third_nom":"","third_punts":0}';
+var json2 = localStorage.getItem("records") || '[]';
 records_data = JSON.parse(json2);
 
 class GameScene extends Phaser.Scene {
@@ -80,25 +80,39 @@ class GameScene extends Phaser.Scene {
 									// Guardem el record
 									// '{"first_nom":"","first_punts":0,"second_nom":"","second_punts":0,"third_nom":"","third_punts":0}'
 
-									// Lo siento mucho, lo sé, soy consciente, perdóname por mis pecados, solo voy corto de tiempo y de valor para enfrentarme a otra cosa
-									if (records_data.first_punts < arcade_data.punts) {
-										records_data.third_nom = records_data.second_nom;
-										records_data.third_punts = records_data.second_punts;
-										records_data.second_nom = records_data.first_nom;
-										records_data.second_punts = records_data.first_punts;
-										records_data.first_nom = sessionStorage.getItem("username");
-										records_data.first_punts = arcade_data.punts;
-									}
-									else if (records_data.second_punts < arcade_data.punts) {
-										records_data.third_nom = records_data.second_nom;
-										records_data.third_punts = records_data.second_punts;
-										records_data.second_nom = sessionStorage.getItem("username");
-										records_data.second_punts = arcade_data.punts;
-									}
-									else if (records_data.third_punts < arcade_data.punts) {
-										records_data.third_nom = sessionStorage.getItem("username");
-										records_data.third_punts = arcade_data.punts;
-									}
+									// // Lo siento mucho, lo sé, soy consciente, perdóname por mis pecados, solo voy corto de tiempo y de valor para enfrentarme a otra cosa
+									// if (records_data.first_punts < arcade_data.punts) {
+									// 	records_data.third_nom = records_data.second_nom;
+									// 	records_data.third_punts = records_data.second_punts;
+									// 	records_data.second_nom = records_data.first_nom;
+									// 	records_data.second_punts = records_data.first_punts;
+									// 	records_data.first_nom = sessionStorage.getItem("username");
+									// 	records_data.first_punts = arcade_data.punts;
+									// }
+									// else if (records_data.second_punts < arcade_data.punts) {
+									// 	records_data.third_nom = records_data.second_nom;
+									// 	records_data.third_punts = records_data.second_punts;
+									// 	records_data.second_nom = sessionStorage.getItem("username");
+									// 	records_data.second_punts = arcade_data.punts;
+									// }
+									// else if (records_data.third_punts < arcade_data.punts) {
+									// 	records_data.third_nom = sessionStorage.getItem("username");
+									// 	records_data.third_punts = arcade_data.punts;
+									// }
+
+									// BUENO, AL FINAL NO HA HECHO FALTA TODO BIEN CHACHI :3
+
+									records_data.push({
+										"nom": sessionStorage.getItem("username"),
+										"punts": arcade_data.punts
+									})
+
+									records_data.sort((a,b) => {
+										return b.punts - a.punts
+									})
+
+									records_data.splice(3);
+
 									localStorage.setItem("records", JSON.stringify(records_data));
 
 									var default_arcade_data = {
